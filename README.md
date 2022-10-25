@@ -19,4 +19,58 @@ Você deve criar as suas classes de acordo com o diagrama abaixo:
 3. O método **InstalarAplicativo** deve ser sobrescrito na classe Nokia e iPhone, pois ambos possuem diferentes maneiras de instalar um aplicativo.
 
 ## Solução
-O código está pela metade, e você deverá dar continuidade obedecendo as regras descritas acima, para que no final, tenhamos um programa funcional. Procure pela palavra comentada "TODO" no código, em seguida, implemente conforme as regras acima.
+
+Implementar as propriedades faltantes de acordo com o diagrama
+~~~csharp
+    private string _modelo;
+    private string _imei;
+    private int _memoria;
+~~~
+
+Passar os parâmetros do construtor para as propriedades
+~~~csharp
+    _modelo = modelo;
+    _imei = imei;
+     _memoria = memoria;
+~~~
+
+Herdar da classe "Smartphone"
+~~~csharp
+
+    //[...]
+    public class Nokia : Smartphone
+    //[...]
+    public Nokia(string numero, string modelo, string imei, int memoria) : base(numero, modelo, imei, memoria) {}
+    //[...]
+    public class Iphone : Smartphone
+    //[...]
+    public Iphone(string numero, string modelo, string imei, int memoria) : base(numero, modelo, imei, memoria) {}
+~~~
+
+Sobrescrever o método "InstalarAplicativo"
+~~~csharp
+    public override void InstalarAplicativo(string aplicativo)
+    {
+        Console.WriteLine($"Você está instalando '{aplicativo}' no Nokia");
+    }
+    //[...]
+    public override void InstalarAplicativo(string aplicativo)
+    {
+        Console.WriteLine($"Você está instalando '{aplicativo}' no Iphone");
+    }
+~~~
+
+Realizar os testes com as classes Nokia e Iphone
+~~~csharp
+    Console.WriteLine("Smartphone Nokia:");
+    Smartphone nokia = new Nokia(numero: "123456", modelo: "Modelo 1", imei: "1111111111", memoria: 64);
+    nokia.Ligar();
+    nokia.InstalarAplicativo("Whatsapp");
+
+    Console.WriteLine("\n");
+
+    Console.WriteLine("Smartphone Iphone:");
+    Smartphone iphone = new Iphone(numero: "4987", modelo: "Modelo 2", imei: "2222222222", memoria: 128);
+    iphone.Ligar();
+    iphone.InstalarAplicativo("Telegram");
+~~~
